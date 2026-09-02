@@ -1,9 +1,15 @@
 .titleDiv{
   padding: 2rem;
-  background: black;
-  color: white;
   font-size: 2rem;
   text-align: center;
+}
+
+.task{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  border: 1px solid black ;
 }
 
 input{
@@ -12,13 +18,12 @@ input{
   border-radius: 2rem;
   border: 1px solid black;
   margin: 2rem;
-
 }
 
 button{
   padding: 1rem 2rem;
   font-size: 1rem;
+  background-color: red;
   border: none;
   border-radius: 1rem;
-
 }
