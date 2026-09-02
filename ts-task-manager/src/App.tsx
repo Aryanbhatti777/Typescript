@@ -34,6 +34,12 @@ function App() {
 
   }
 
+  const handleComplete = (id: number): void => {
+    const updatedTasks = tasks.map(item => item.id === id ? { ...item, completed: !item.completed } : item)
+    setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  }
+
   return (
     <>
       <input
@@ -45,10 +51,11 @@ function App() {
       <div className="tasks">
         {tasks.map((item) => {
           return (
-            <div className="task">
-              <div className="titleDiv" key={item.id}>
-                {item.title}
-              </div>
+            <div className="task" key={item.id}>
+              <div className="titleDiv">{item.title}</div>
+              <button onClick={() => handleComplete(item.id)}>
+                {item.completed ? "Undo" : "Complete"}
+              </button>
               <button onClick={() => handleDelete(item.id)}>Delete</button>
             </div>
           );
