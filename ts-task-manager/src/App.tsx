@@ -7,6 +7,7 @@ function App() {
     savedTasks ? JSON.parse(savedTasks) : [],
   );
   const [title, setTitle] = useState<string>("");
+  const [editingId , setEditingid] = useState<number>()
 
   const addTask = (title: string): void => {
     if (title.trim() === "") {
@@ -40,6 +41,10 @@ function App() {
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   }
 
+  const handleEdit = (item : Task): void => {
+    setEditingid(item.id)
+    setTitle(item.title);
+  }
   return (
     <>
       <input
@@ -53,10 +58,13 @@ function App() {
           return (
             <div className="task" key={item.id}>
               <div className="titleDiv">{item.title}</div>
-              <button onClick={() => handleComplete(item.id)}>
-                {item.completed ? "Undo" : "Complete"}
-              </button>
-              <button onClick={() => handleDelete(item.id)}>Delete</button>
+              <div>
+                <button onClick={() => handleComplete(item.id)}>
+                  {item.completed ? "Undo" : "Complete"}
+                </button>
+                <button onClick={() => handleEdit(item)}>Edit</button>
+                <button onClick={() => handleDelete(item.id)}>Delete</button>
+              </div>
             </div>
           );
         })}
