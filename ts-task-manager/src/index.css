@@ -18,6 +18,7 @@ input{
   border-radius: 2rem;
   border: 1px solid black;
   margin: 2rem;
+  font-size: 1rem;
 }
 
 button{

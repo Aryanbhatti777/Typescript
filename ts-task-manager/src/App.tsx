@@ -15,15 +15,21 @@ function App() {
       return;
     }
 
-    const newTask: Task = {
-      id: Date.now(),
-      title: title,
-      completed: false,
-    };
-
-    const updatedTasks = [...tasks, newTask];
-    setTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    if (editingId) {
+      
+      const editedTasks = tasks.map(item => item.id === editingId ? { ...item, title: title } : item)
+      setTasks(editedTasks);
+      localStorage.setItem("tasks", JSON.stringify(editedTasks))
+    } else {
+      const newTask: Task = {
+        id: Date.now(),
+        title: title,
+        completed: false,
+      };
+      const updatedTasks = [...tasks, newTask];
+      setTasks(updatedTasks);
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    }
     setTitle("");
   };
 
@@ -52,12 +58,12 @@ function App() {
         onChange={(e) => setTitle(e.target.value)}
         value={title}
       />
-      <button onClick={() => addTask(title)}>Add Task</button>
+      <button onClick={() => addTask(title)}>{ editingId ? "Update Task" : "Add Task"}</button>
       <div className="tasks">
         {tasks.map((item) => {
           return (
             <div className="task" key={item.id}>
-              <div className="titleDiv">{item.title}</div>
+              <div className="titleDiv" style={{textDecoration: item.completed ? "line-through" : "none", color: item.completed ? "grey" : "black"}}>{item.title}</div>
               <div>
                 <button onClick={() => handleComplete(item.id)}>
                   {item.completed ? "Undo" : "Complete"}
