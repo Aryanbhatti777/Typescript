@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Task } from "./types/task";
+import type { Task, taskFilter } from "./types/task";
 
 function App() {
   const savedTasks = localStorage.getItem("tasks");
@@ -7,7 +7,8 @@ function App() {
     savedTasks ? JSON.parse(savedTasks) : [],
   );
   const [title, setTitle] = useState<string>("");
-  const [editingId , setEditingid] = useState<number>()
+  const [editingId, setEditingid] = useState<number>();
+  const [filter, setFilter] = useState<taskFilter>("all");
 
   const addTask = (title: string): void => {
     if (title.trim() === "") {
