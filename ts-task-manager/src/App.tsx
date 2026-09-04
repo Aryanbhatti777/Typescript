@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Task, taskFilter } from "./types/task";
+import type { Task, TaskFilter } from "./types/task";
 
 function App() {
   const savedTasks = localStorage.getItem("tasks");
@@ -8,7 +8,8 @@ function App() {
   );
   const [title, setTitle] = useState<string>("");
   const [editingId, setEditingid] = useState<number>();
-  const [filter, setFilter] = useState<taskFilter>("all");
+  const [filter, setFilter] = useState<TaskFilter>("all");
+
 
   const addTask = (title: string): void => {
     if (title.trim() === "") {
@@ -52,6 +53,12 @@ function App() {
     setEditingid(item.id)
     setTitle(item.title);
   }
+
+  const handleFilterChange = (value: string): void => {
+    if (value === "all" || value === "active" || value === "completed") {
+      setFilter(value);
+    }
+  }
   return (
     <>
       <input
@@ -59,7 +66,13 @@ function App() {
         onChange={(e) => setTitle(e.target.value)}
         value={title}
       />
-      <button onClick={() => addTask(title)}>{ editingId ? "Update Task" : "Add Task"}</button>
+      <button onClick={() => addTask(title)}>{editingId ? "Update Task" : "Add Task"}</button>
+      <h1>Filter tasks</h1>
+      <select name="" id="" onChange={(e) => handleFilterChange(e.target.value)}>
+        <option value="all">All</option>
+        <option value="active">Active</option>
+        <option value="completed">Completed</option>
+      </select>
       <div className="tasks">
         {tasks.map((item) => {
           return (

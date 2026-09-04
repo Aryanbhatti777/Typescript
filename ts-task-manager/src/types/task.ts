@@ -4,4 +4,4 @@ export interface Task{
     completed: boolean;
 }
 
-export type taskFilter = "all" | "active" | "completed";
+export type TaskFilter = "all" | "active" | "completed";
