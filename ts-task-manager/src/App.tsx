@@ -9,7 +9,15 @@ function App() {
   const [title, setTitle] = useState<string>("");
   const [editingId, setEditingid] = useState<number>();
   const [filter, setFilter] = useState<TaskFilter>("all");
-
+  const filteredProducts = tasks.filter(item => {
+    if (filter === "all") {
+      return item
+    } else if (filter === "active") {
+      return item.completed === false
+    } else {
+      return item.completed === true;
+    }
+  })
 
   const addTask = (title: string): void => {
     if (title.trim() === "") {
@@ -59,6 +67,8 @@ function App() {
       setFilter(value);
     }
   }
+  console.log(filteredProducts)
+
   return (
     <>
       <input
@@ -74,7 +84,7 @@ function App() {
         <option value="completed">Completed</option>
       </select>
       <div className="tasks">
-        {tasks.map((item) => {
+        {filteredProducts.map((item) => {
           return (
             <div className="task" key={item.id}>
               <div className="titleDiv" style={{textDecoration: item.completed ? "line-through" : "none", color: item.completed ? "grey" : "black"}}>{item.title}</div>
