@@ -1,10 +1,11 @@
-import { useState, type FormEvent } from "react"
+import { useEffect, useState, type FormEvent } from "react"
 import type { Transaction } from "./types/transaction"
 
 
 function App() {
+  const transactionsFetched = localStorage.getItem("transactions")
 
-  const [transactions, setTransactions] = useState<Transaction[]>([])
+  const [transactions, setTransactions] = useState<Transaction[]>(transactionsFetched ? JSON.parse(transactionsFetched) : [])
   const [description, setDescription] = useState<string>("");
   const [amount, setAmount] = useState<number>(0);
   const [type, setType] = useState<Transaction["type"]>("income")
@@ -14,7 +15,7 @@ function App() {
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault();
 
-    const transaction = {
+    const transaction: Transaction = {
       id: Date.now(),
       description,
       amount,
@@ -23,16 +24,17 @@ function App() {
       date
     }
 
-    transactions.push(transaction);
-    setTransactions(transactions)
-    localStorage.setItem("transactions", JSON.stringify(transactions));
-    console.log(transactions)
+    setTransactions((prev) => [...prev, transaction])
     setAmount(0);
     setDescription("")
     setType("income")
     setCategory("")
     setDate("")
   }
+
+  useEffect(() => {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+  }, [transactions])
 
   return (
     <>
@@ -52,6 +54,16 @@ function App() {
         <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
         <input type="submit" value="Add Transaction" />
       </form>
+
+      {transactions.map(item => {
+        return (<div key={item.id}>
+          <p>{item.description}</p>
+          <h4>{item.amount}</h4>
+          <p>{item.type}</p>
+          <p>{item.category}</p>
+          <p>{ item.date}</p>
+        </div>)
+      })}
     </>
   )
 }
