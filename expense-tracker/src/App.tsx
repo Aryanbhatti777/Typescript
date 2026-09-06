@@ -11,7 +11,28 @@ function App() {
   const [category, setCategory] = useState<string>("")
   const [date, setDate] = useState<string>("")
 
- 
+  const handleSubmit = (e: FormEvent): void => {
+    e.preventDefault();
+
+    const transaction = {
+      id: Date.now(),
+      description,
+      amount,
+      type,
+      category,
+      date
+    }
+
+    transactions.push(transaction);
+    setTransactions(transactions)
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+    console.log(transactions)
+    setAmount(0);
+    setDescription("")
+    setType("income")
+    setCategory("")
+    setDate("")
+  }
 
   return (
     <>
