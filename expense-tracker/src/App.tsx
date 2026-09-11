@@ -44,6 +44,17 @@ function App() {
     return income
   }
 
+  const getExpense = (): number => {
+    
+    const income = transactions.reduce((acc, curr) => {
+      if (curr.type === "expense") {
+        return acc + curr.amount;
+      }
+      return acc
+    },0)
+    return income
+  }
+
   useEffect(() => {
     localStorage.setItem("transactions", JSON.stringify(transactions));
   }, [transactions])
@@ -59,7 +70,7 @@ function App() {
         </div>
         <div>
           <h3>Total Expense</h3>
-          <p>0</p>
+          <p>{getExpense()}</p>
         </div>
         <div>
           <h3>Balance</h3>
