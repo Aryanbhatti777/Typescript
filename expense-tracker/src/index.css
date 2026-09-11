@@ -81,7 +81,7 @@ form input[type="submit"]:hover {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
 
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
     gap: 15px;
 }
@@ -123,3 +123,11 @@ form input[type="submit"]:hover {
     }
 }
 
+
+button{
+    width: 5vw;
+    padding: 1rem 2rem;
+    border: none;
+    background-color: red;
+    color: white
+}
