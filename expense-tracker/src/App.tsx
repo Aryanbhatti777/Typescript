@@ -55,6 +55,12 @@ function App() {
     return income
   }
 
+  const getBalance = (): number => {
+    const income = getIncome();
+    const expense = getExpense();
+    const balance = income - expense;
+    return balance
+  }
   useEffect(() => {
     localStorage.setItem("transactions", JSON.stringify(transactions));
   }, [transactions])
@@ -74,7 +80,7 @@ function App() {
         </div>
         <div>
           <h3>Balance</h3>
-          <p>0</p>
+          <p>{getBalance()}</p>
         </div>
       </div>
       <form onSubmit={handleSubmit}>
