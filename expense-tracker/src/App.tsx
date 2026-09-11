@@ -11,6 +11,7 @@ function App() {
   const [type, setType] = useState<Transaction["type"]>("income")
   const [category, setCategory] = useState<string>("")
   const [date, setDate] = useState<string>("")
+  const [totalIncome, setTotalIncome] = useState<number>(0)
 
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault();
@@ -32,12 +33,39 @@ function App() {
     setDate("")
   }
 
+  const getIncome = (): number => {
+    
+    const income = transactions.reduce((acc, curr) => {
+      if (curr.type === "income") {
+        return acc + curr.amount;
+      }
+      return acc
+    },0)
+    return income
+  }
+
   useEffect(() => {
     localStorage.setItem("transactions", JSON.stringify(transactions));
   }, [transactions])
 
+
+
   return (
     <>
+      <div className="totalIncome">
+        <div>
+          <h3>Total Income</h3>
+          <p>{getIncome()}</p>
+        </div>
+        <div>
+          <h3>Total Expense</h3>
+          <p>0</p>
+        </div>
+        <div>
+          <h3>Balance</h3>
+          <p>0</p>
+        </div>
+      </div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="">Description</label>
         <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />

@@ -1,0 +1,125 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
+    color: #1f2937;
+    padding: 40px 20px;
+}
+
+#root {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Form */
+form {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 20px;
+    margin-bottom: 35px;
+}
+
+form label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-top: 8px;
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    background: #fff;
+    transition: 0.2s ease;
+}
+
+form input:focus,
+form select:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+/* Submit button */
+form input[type="submit"] {
+    grid-column: 1 / -1;
+    margin-top: 12px;
+    border: none;
+    background: #4f46e5;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+form input[type="submit"]:hover {
+    background: #4338ca;
+    transform: translateY(-1px);
+}
+
+/* Transaction cards */
+#root>div {
+    background: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    border-left: 5px solid #6366f1;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    gap: 15px;
+}
+
+#root>div p {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+#root>div h4 {
+    font-size: 18px;
+    color: #111827;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    body {
+        padding: 20px 12px;
+    }
+
+    form {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    form input[type="submit"] {
+        grid-column: auto;
+    }
+
+    #root>div {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 450px) {
+    #root>div {
+        grid-template-columns: 1fr;
+    }
+}
+
